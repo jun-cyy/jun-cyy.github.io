@@ -1,222 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0061)http://127.0.0.1:5500/CSS%20bg%20text%20animaition/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello World I Am DDT</title>
-   <style>
-   body,#slider,.wrap,.slide-content{
-       margin: 0;
-       height: 100vh;
-       padding: 0;
-       width: 100%;
-       font-family: Arial, Helvetica, sans-serif;
-       overflow-x: hidden;
-   }
-.wrap{
-    position: relative;
-}
-.slider{
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.slide1{background-image: url('img/1 (3).jpg')}
-.slide2{background-image: url('img/1 (2).jpg')}
-.slide3{background-image: url('img/1 (6).jpg')}
-
-.slide-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-}
-.slide-content span{
-
-    font-size: 1rem;
-    color: #fff;
-}
-.arrow{
-    cursor: e-resize;
-    position: absolute;
-    top: 50%;
-    margin-top: -10px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-
-}
-
-#arrow-left{
-    border-width: 8px 9px 8px 0 ;
-    border-color: transparent #fff;
-    left: 0;
-    margin-left : 10px;} 
-
-#arrow-right{
-    border-width: 8px 0 9px 8px ;
-    border-color: transparent transparent transparent white ;
-    right: 0;
-    margin-right: 10px;
-
+    <title>Document</title>
+    <link href="./pigyop_files/css" rel="stylesheet">
+    <style>
+    
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        overflow:hidden;
+        
     }
-
-.type-writer-container{
-    font-size: 7px;
-
+    .container{
+        display: flex;
+        flex-direction: column;
+        background:url('');
+        height:100vh;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    #pig{
+        width:100px;
+        height:100px;
+        margin:auto;
+    }
+    .animated {
+        font-family: 'Charm', cursive;
+        font-size: 6rem;
+        background: url('pig.jpg') ;
+        margin: 0;
+        padding: 0;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: moveBg 90s linear infinite;
+        line-height: 80%;
+    }
+@keyframes moveBg {
+    0% {
+        background-position: 0% 30%
+    }
+    100% {
+        background-position: 100% 50%
+    }
 }
-.txt-type > .txt{
-    border-right: 0.1rem solid #777
-}
 
-   </style>
+
+
+
+
+
+
+    </style>
 </head>
 <body>
-
-    <div class="type-writer-container">
-    <h1>DDT.
-       <span class="txt-type" data-wait="3000" 
-       data-words='["Designer","Developer","Traveler"]'></span>
-    </h1>
-    <h2 class="txt-type2"></h2>
-    </div>
-
-
-<div class="wrap">
-    <div id="arrow-left" class="arrow"></div>
-    <div id="slider">
-        <div class="slide slide1">
-            <div class="slide-content">
-                <span>Blue</span>
-            </div>
-        </div>
-        <div class="slide slide2">
-                <div class="slide-content">
-                    <span>Nature</span>
-                </div>
-            </div>
-         <div class="slide slide3">
-            <div class="slide-content">
-                <span>Human</span>
-            </div>
-        </div>    
-    </div>
-    <div id="arrow-right" class="arrow"></div>
+    <h1>lets make it!mother fucker!!!</h1>
+<div class="container">
+    <h1 class="animated">MERRY XMAS DEBBIE!</h1>
+    <p><img src="pig.jpg" alt="" id="pig"></p>
 </div>
 
 
 
 
 
-<script>
-
-const typeWriter = function(txtElement,words,wait=3000){
-this.txtElement = txtElement;
-this.words = words;
-this.txt='';
-this.wordIndex = 0;
-this.wait = parseInt(wait, 10);
-this.type();
-this.isDeleting = false;
-}
-
-typeWriter.prototype.type = function(){
-    const current = this.wordIndex % this.words.length;
-    const fullTxt = this.words[current];
-    
-    
-    if(this.isDeleting){
-        this.txt = fullTxt.substring(0,this.txt.length -1);
-    }else{
-        this.txt = fullTxt.substring(0,this.txt.length +1);
-    }
-    this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
-    
-
-    let typeSpeed = 300;
-    
-    if (this.isDeleting){
-        typeSpeed /= 3;
-    }
-
-    if (!this.isDeleting && this.txt===fullTxt){
-        typeSpeed = this.wait;
-        this.isDeleting = true;
-
-    } else if( this.isDeleting && this.txt === ''){
-        this.isDeleting = false;
-        this.wordIndex++;
-        typeSpeed = 500;
-    }
-    
-    setTimeout( () => this.type(),typeSpeed);
-}
 
 
-document.addEventListener('DOMContentLoaded',init);
-
-function init(){
-    const txtElement = document.querySelector('.txt-type');
-    const words = JSON.parse(txtElement.getAttribute('data-words'));
-    const wait = txtElement.getAttribute('data-wait');
-
-    new typeWriter(txtElement,words,wait);
-
-}
-
-
-
-
-
-
-
-let slideImgs = document.querySelectorAll('.slide'),
-leftArrow = document.querySelector('#arrow-left'),
-rightArrow = document.querySelector('#arrow-right'),
-current = 0;
-
-function reset(){
-    slideImgs.forEach(img=>img.style.display='none');
-   
-}
-function startSlide(){
-    reset();
-    slideImgs[0].style.display = 'block';
-}
-function slideLeft(){
-    reset();
-    slideImgs[current-1].style.display ='block';
-    current--;
-}
-function slideRight(){
-    reset();
-    slideImgs[current+1].style.display ='block';
-    current++;
-}
-leftArrow.addEventListener('click',()=>{
-    if(current===0){
-        current=slideImgs.length;
-    }
-    slideLeft();
-});
-
-
-rightArrow.addEventListener('click',()=>{
-    if(current===slideImgs.length-1){
-        current=-1;
-    } 
-    slideRight();
-});
-
-
-startSlide();
-
-
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
 </script>
-
-
-
-
-</body>
-</html>
+<div id="ToolTipDic" class="tooltip_dic" style="display: inline !important; visibility: visible !important; position: absolute !important; height: auto !important; width: auto !important; z-index: 1410065406 !important; vertical-align: middle; padding: 1px; margin: 0px !important; font-size: 9pt !important; line-height: normal !important; font-family: &quot;맑은 고딕&quot;; font-weight: bold; color: rgb(0, 0, 0); border: 1px solid rgb(112, 112, 112); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(240, 240, 240)), to(rgb(220, 220, 220))); overflow: hidden; white-space: nowrap; border-radius: 0.2em; box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 5px; left: 316px !important; top: 181px !important;">debbie : DEBUTANTE, 여자 이름</div></body></html>
